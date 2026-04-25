@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Personalized Learning System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>EduAI</span>
+            </div>
+            <div class="student-selector">
+                <label for="studentSelect">Select Student:</label>
+                <select id="studentSelect"></select>
+            </div>
+            <div id="studentProfile" class="profile-info">
+                <p><strong>Name:</strong> <span id="studentName">--</span></p>
+                <p><strong>Level:</strong> <span id="studentLevel">--</span></p>
+                <p><strong>Interests:</strong> <span id="studentInterests">--</span></p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>AI-Based Personalized Learning</h1>
+                <p>Tailored recommendations based on your performance and interests.</p>
+            </header>
+
+            <!-- Navigation Tabs -->
+            <nav class="tabs">
+                <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+                <button class="tab-btn" data-tab="pathway">Learning Path</button>
+                <button class="tab-btn" data-tab="recommendations">AI Recommendations</button>
+                <button class="tab-btn" data-tab="library">Resource Library</button>
+            </nav>
+
+            <!-- Tab Content -->
+            <section id="dashboard" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Avg Score</h3>
+                        <p id="avgScore">--</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Time Spent</h3>
+                        <p id="totalTime">--</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Completed</h3>
+                        <p id="completedCount">--</p>
+                    </div>
+                    <div class="stat-card predictive">
+                        <i class="fas fa-magic"></i>
+                        <h3>Growth Trend</h3>
+                        <p id="growthTrend">--</p>
+                        <small>Predicted Next: <span id="predictedScore">--</span>%</small>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+                <div class="history-table">
+                    <h3>Recent Activity</h3>
+                    <table id="activityTable">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Type</th>
+                                <th>Score</th>
+                                <th>Time</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="pathway" class="tab-content">
+                <div class="pathway-container">
+                    <h2>Your Adaptive Learning Path</h2>
+                    <p>A step-by-step journey designed specifically for your current level.</p>
+                    <div id="pathwayList" class="pathway-list"></div>
+                </div>
+            </section>
+
+            <section id="recommendations" class="tab-content">
+                <div class="rec-section">
+                    <h2>Recommended for You</h2>
+                    <div id="adaptiveRecs" class="card-grid"></div>
+                </div>
+                <hr>
+                <div class="rec-section">
+                    <h2>Based on Your Interests</h2>
+                    <div id="contentRecs" class="card-grid"></div>
+                </div>
+            </section>
+
+            <section id="library" class="tab-content">
+                <div class="filter-bar">
+                    <input type="text" id="librarySearch" placeholder="Search resources...">
+                    <select id="subjectFilter">
+                        <option value="">All Subjects</option>
+                    </select>
+                </div>
+                <table id="libraryTable">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Subject</th>
+                            <th>Type</th>
+                            <th>Difficulty</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <!-- Quiz Modal -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="quizTitle">Quick Quiz</h2>
+            <p id="quizSubject"></p>
+            <div id="quizQuestion" class="quiz-body">
+                <p>What is your understanding of this topic after reviewing the material?</p>
+                <div class="score-input">
+                    <label>Rate your understanding (0-100):</label>
+                    <input type="range" id="quizScore" min="0" max="100" value="70" oninput="this.nextElementSibling.value = this.value">
+                    <output>70</output>
+                </div>
+            </div>
+            <button id="submitQuizBtn" class="btn-learn">Submit Result</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
